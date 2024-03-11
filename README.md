@@ -4,6 +4,8 @@
 
 Welcome to CNN Emotion Detector, where the future of AI-driven feedback takes shape. This project aims to develop a Deep Learning Convolutional Neural Network (CNN) using PyTorch to analyze facial images and categorize facial expression into distinct states: Neutral, Engaged/Focused, Surprised, and Happy.
 
+[Our GitHub Repo](https://github.com/loaidieu/CNN-Emotion-Dectector)
+
 - :neutral_face: **Neutral**
 - :smiley: **Happy**
 - :astonished: **Surprised**
