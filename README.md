@@ -31,6 +31,14 @@ Includes 25 representative images for each class: Neutral, Engaged/Focused, Surp
 
 This file. Provides an overview of the project, describes the purpose of each file, and outlines the steps to execute the project's code for data cleaning and visualization.
 
+### Data
+
+This folder contains the original images/data. [Provenance Information](https://www.kaggle.com/datasets/ananthu017/emotion-detection-fer?rvi=1)
+
+### Data_visuals
+
+This folder contains the data visualizations of the dataset.
+
 ## Execution/Setup Instructions
 
 First, you need to have Python and `pip`, the Python package manager, installed on your system.
