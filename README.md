@@ -51,7 +51,7 @@ First, you need to have Python and `pip`, the Python package manager, installed 
 3. **Install Required Libraries**:
    - To excute the script we need to install some libraries Open your terminal or command prompt and run the following command:
      ```bash
-     pip install torch torchvision numpy matplotlib scikit-learn pillow tdqm
+     pip install torch torchvision numpy matplotlib scikit-learn pillow tqdm
      ```
    This command will install the required libraries to run the code.
 
