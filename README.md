@@ -13,9 +13,10 @@ Welcome to CNN Emotion Detector, where the future of AI-driven feedback takes sh
 
 ### Python Scripts
 
-- `data_cleaning.py`: Contains functions and routines to standardize the dataset by resizing images, applying light processing such as rotations, brightness adjustments, and minor cropping. 
-- `data_visualization.py`: Includes code to generate visualizations of the dataset using scikit-learn and Matplotlib. It plots class distribution, sample images, and pixel intensity distributions.
-- `dataset_processing.py`: Manages the preprocessing of data.
+- `data_processing.py`: Manages the cleaning/preprocessing of the data.
+- `data_visualization.py`: Includes code to generate visualizations of the dataset.
+- `main.py`: Serves as the main driver of our data cleaning/processing and visualization tasks.
+
 ### Dataset
 
 A document that lists the provenance of each dataset/image used in this project. It includes details such as dataset name, source, and licensing type. The document also links to the full dataset repository.
@@ -28,58 +29,33 @@ Includes 25 representative images for each class: Neutral, Engaged/Focused, Surp
 
 This file. Provides an overview of the project, describes the purpose of each file, and outlines the steps to execute the project's code for data cleaning and visualization.
 
-## Execution Instructions
+## Execution/Setup Instructions
 
-### Data Cleaning
+First, you need to have Python and `pip`, the Python package manager, installed on your system.
 
-To clean and prepare your dataset for training, follow these steps:
+### Installing Python and `pip`
 
-1. **Ensure Dependencies Are Installed**: Make sure you have Python, PyTorch, scikit-learn, and Matplotlib installed in your environment.
-2. **Execute Data Cleaning Script**: Run `python data_cleaning.py`. This script automatically standardizes the size of the images and applies preprocessing techniques to enhance the dataset's quality.
+1. **Python Installation**:
+   - If you don't already have Python installed, download it from [the official Python website](https://www.python.org/downloads/). Installing Python will also install `pip`.
 
-### Data Visualization
+2. **Verifying Installation**:
+   - After installation, you can verify that Python and `pip` are installed by opening a terminal (Command Prompt on Windows, Terminal on macOS and Linux) and typing:
+     ```bash
+     python --version
+     pip --version
+     ```
+   If both commands return version numbers, Python and `pip`. Congratz it means you have it install on your machine.
 
-To visualize the dataset for exploratory analysis:
+3. **Install Required Libraries**:
+   - To excute the script we need to install some libraries Open your terminal or command prompt and run the following command:
+     ```bash
+     pip install torch torchvision numpy matplotlib scikit-learn pillow
+     ```
+   This command will install the required libraries to run the code.
 
-1. **Run Data Visualization Script**: Execute `python data_visualization.py`. This script generates several plots to help understand the dataset's distribution and characteristics.
-2. **Review Generated Plots**: Check the generated plots for class distribution, sample images per class, and pixel intensity distributions.
-
-- :neutral_face: **Neutral**
-- :smiley: **Happy**
-- :astonished: **Surprised**
-- :nerd_face: **Engaged**
-
-## Contents
-
-### Python Scripts
-
-- `data_cleaning.py`: Contains functions and routines to standardize the dataset by resizing images, applying light processing such as rotations, brightness adjustments, and minor cropping. 
-- `data_visualization.py`: Includes code to generate visualizations of the dataset using scikit-learn and Matplotlib. It plots class distribution, sample images, and pixel intensity distributions.
-- `dataset_processing.py`: Manages the preprocessing of data.
-### Dataset
-
-A document that lists the provenance of each dataset/image used in this project. It includes details such as dataset name, source, and licensing type. The document also links to the full dataset repository.
-
-### Representative Images
-
-Includes 25 representative images for each class: Neutral, Engaged/Focused, Surprised, and Happy.
-
-### `README.md`
-
-This file. Provides an overview of the project, describes the purpose of each file, and outlines the steps to execute the project's code for data cleaning and visualization.
-
-## Execution Instructions
-
-### Data Cleaning
-
-To clean and prepare your dataset for training, follow these steps:
-
-1. **Ensure Dependencies Are Installed**: Make sure you have Python, PyTorch, scikit-learn, and Matplotlib installed in your environment.
-2. **Execute Data Cleaning Script**: Run `python data_cleaning.py`. This script automatically standardizes the size of the images and applies preprocessing techniques to enhance the dataset's quality.
-
-### Data Visualization
-
-To visualize the dataset for exploratory analysis:
-
-1. **Run Data Visualization Script**: Execute `python data_visualization.py`. This script generates several plots to help understand the dataset's distribution and characteristics.
-2. **Review Generated Plots**: Check the generated plots for class distribution, sample images per class, and pixel intensity distributions.
+4. **Running the Scripts**:
+   - You can to run the script with the following command in your terminal:
+     ```bash
+     python main.py
+     ```
+   This will trigger the data cleaning, processing, and visualization of the dataset.
