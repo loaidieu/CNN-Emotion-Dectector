@@ -27,6 +27,10 @@ A document that lists the provenance of each dataset/image used in this project.
 
 Includes 25 representative images for each class: Neutral, Engaged/Focused, Surprised, and Happy.
 
+### Project Report
+
+The project report can be found in the report/ folder
+
 ### `README.md`
 
 This file. Provides an overview of the project, describes the purpose of each file, and outlines the steps to execute the project's code for data cleaning and visualization.
