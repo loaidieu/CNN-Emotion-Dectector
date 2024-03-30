@@ -1,3 +1,4 @@
+import subprocess
 from data_processing import *
 from data_visualization import *
 from custom_dataset import *
@@ -7,6 +8,11 @@ from models.variant_1 import VarCnn1
 from models.variant_2 import VarCnn2
 from train_loop import train_loop
 from predict import predict
+
+####################################################################################################################################################################
+# Pip Install the Required Libraries
+####################################################################################################################################################################
+subprocess.check_call(['pip', 'install', '-r', 'requirements.txt'])
 
 ####################################################################################################################################################################
 # Data Processing
