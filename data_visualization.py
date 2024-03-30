@@ -1,7 +1,7 @@
 from tools_lib import *
 
 # plot 5x5 grid of images
-def plot_matrix_grid(V):
+def plot_matrix_grid(emotion ,V):
     """
     Given an array V containing stacked matrices, plots them in a grid layout.
     V should have shape (K,M,N) where V[k] is a matrix of shape (M,N).
@@ -20,7 +20,7 @@ def plot_matrix_grid(V):
         ax.set_yticks([])
     fig.colorbar(img, cax=fig.add_axes([0.92, 0.25, 0.01, .5]))   # Add a colorbar on the right
 
-    plt.show()
+    plt.savefig(f'data_visuals/{emotion}_images.png')
 
 def plot_image_w_pixel_density(image, label):
     assert image.ndim  == 2, "Expected image to have 2 dimensions, not %d" % image.ndim
@@ -45,7 +45,7 @@ def plot_image_w_pixel_density(image, label):
     plt.tight_layout()
     plt.show()
 
-def plot_unique_emotions_densities(X, y, unique_emotions):
+def plot_unique_emotions_densities(name, X, y, unique_emotions):
     plt.figure(figsize=(14, 7))
 
     for i in range(len(unique_emotions)):
@@ -69,4 +69,4 @@ def plot_unique_emotions_densities(X, y, unique_emotions):
         plt.grid(True)
 
     plt.tight_layout()
-    plt.show()
+    plt.savefig(f'data_visuals/{name}.png')
