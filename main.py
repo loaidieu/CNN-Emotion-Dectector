@@ -4,9 +4,12 @@ from data_visualization import *
 ##################################################################################
 #                               Data Processing                                  #
 ##################################################################################
-# add more data by flipping the images (data augmentation)
+# add more data by flipping, rotating, and brightness adjusting the images (data augmentation)
 # can only be done once
-if (check_flipped('./data') == False): flip_png('./data')
+if (check_modified('./data') == False): 
+    flip_png('./data')
+    rotate_png('./data')
+    adjust_light_png('./data')
 
 # convert images into numpy arrays
 X, y = png_to_numpy('./data')
