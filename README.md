@@ -11,48 +11,15 @@ Welcome to CNN Emotion Detector, where the future of AI-driven feedback takes sh
 - :astonished: **Surprised**
 - :nerd_face: **Engaged**
 
-## Contents
+## Table of Contents
 
-### Python Scripts
 
-- `data_processing.py`: Manages the cleaning/preprocessing of the data.
-- `data_visualization.py`: Includes code to generate visualizations of the dataset.
-- `main.py`: Serves as the main driver of our data cleaning/processing and visualization tasks.
+## Installation
 
-### Dataset
-
-A document that lists the provenance of each dataset/image used in this project. It includes details such as dataset name, source, and licensing type. The document also links to the full dataset repository.
-
-### Representative Images
-
-Includes 25 representative images for each class: Neutral, Engaged/Focused, Surprised, and Happy.
-
-### Project Report
-
-The project report can be found in the report/ folder
-
-### `README.md`
-
-This file. Provides an overview of the project, describes the purpose of each file, and outlines the steps to execute the project's code for data cleaning and visualization.
-
-### Data
-
-This folder contains the original images/data. [Provenance Information](https://www.kaggle.com/datasets/ananthu017/emotion-detection-fer?rvi=1)
-
-### Data_visuals
-
-This folder contains the data visualizations of the dataset.
-
-## Execution/Setup Instructions
-
-First, you need to have Python and `pip`, the Python package manager, installed on your system.
-
-### Installing Python and `pip`
-
-1. **Python Installation**:
+1. **Python Installation**
    - If you don't already have Python installed, download it from [the official Python website](https://www.python.org/downloads/). Installing Python will also install `pip`.
 
-2. **Verifying Installation**:
+2. **Verifying Installation**
    - After installation, you can verify that Python and `pip` are installed by opening a terminal (Command Prompt on Windows, Terminal on macOS and Linux) and typing:
      ```bash
      python --version
@@ -60,16 +27,47 @@ First, you need to have Python and `pip`, the Python package manager, installed 
      ```
    If both commands return version numbers, Python and `pip`. Congratz it means you have it install on your machine.
 
-3. **Install Required Libraries**:
-   - To excute the script we need to install some libraries Open your terminal or command prompt and run the following command:
-     ```bash
-     pip install torch torchvision numpy matplotlib scikit-learn pillow tqdm
-     ```
-   This command will install the required libraries to run the code.
+3. **Package Installation**
+   - All the libraries required to run this project can be found in `requirements.txt`, whose installations are taken care of by `main.py`.
 
-4. **Running the Scripts**:
-   - You can to run the script with the following command in your terminal:
-     ```bash
-     python main.py
-     ```
-   This will trigger the data cleaning, processing, and visualization of the dataset.
+
+## Folder Organization
+- Images used for train, and test ------------------------------------------------------------------> data :file_folder:
+- Plot outputs (data visualizations) ---------------------------------------------------------------> data_visuals :file_folder:
+- Model definitions and trained model pickles ------------------------------------------------------> models :file_folder:
+- Report (along with signed Originality Forms) and original data provenance information ------------> report :file_folder:
+- Confusion matrices and metrics table -------------------------------------------------------------> results :file_folder:
+
+
+## Python Scripts
+- `custom_dataset`: Given X and y, returns Dataset type object (for dataloader)
+- `data_processing.py`: Manages the cleaning/preprocessing of the data
+- `data_visualization.py`: Includes code to generate visualizations of the dataset
+- `main.py`: Serves as the main driver of all other scripts
+- `predict.py`: Given a dataloader object and a trained model, returns a list of predictions
+- `test.py`: Given a dataloader object, a model and a loss function, returns loss and accuracy of predictions over 1 epoch
+- `train.py`: Given a dataloader object, a model, a loss function and an optimizer, returns loss and accuracy of predictions over 1 epoch
+- `train_loop.py`: Given an X number of epochs, runs `train.py` and `test.py` X number of times and returns train and test losses/accuracies
+- `tools_lib.py`: Imports the required libraries to run this project
+
+
+# Model Overview
+3 models were created and trained for this project. `trained_MainCNN` is what will be used going forward as the main model of this project. The other two models (variants) serve as comparison models to the main model. 
+
+
+# Results
++--------+-----------+--------+-------+-----------+--------+-------+----------+
+|        |   Macro   |  Macro | Macro |   Micro   |  Micro | Micro |          |
++--------+-----------+--------+-------+-----------+--------+-------+----------+
+| Models | Precision | Recall |   F1  | Precision | Recall |   F1  | Accuracy |
++--------+-----------+--------+-------+-----------+--------+-------+----------+
+|  Main  |   0.900   |  0.899 | 0.899 |   0.899   |  0.899 | 0.899 |   0.899  |<-------🤯
++--------+-----------+--------+-------+-----------+--------+-------+----------+
+|  Var 1 |   0.804   |  0.796 | 0.793 |   0.794   |  0.794 | 0.794 |   0.794  |
++--------+-----------+--------+-------+-----------+--------+-------+----------+
+|  Var 2 |   0.722   |  0.720 | 0.719 |   0.721   |  0.721 | 0.721 |   0.721  |
++--------+-----------+--------+-------+-----------+--------+-------+----------+
+
+
+## References
+1. Original data can be found here [Provenance Information](https://www.kaggle.com/datasets/ananthu017/emotion-detection-fer?rvi=1)
