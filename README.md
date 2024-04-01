@@ -55,19 +55,5 @@ Welcome to CNN Emotion Detector, where the future of AI-driven feedback takes sh
 3 models were created and trained for this project. `trained_MainCNN` is what will be used going forward as the main model of this project. The other two models (variants) serve as comparison models to the main model. 
 
 
-# Results
-+--------+-----------+--------+-------+-----------+--------+-------+----------+
-|        |   Macro   |  Macro | Macro |   Micro   |  Micro | Micro |          |
-+--------+-----------+--------+-------+-----------+--------+-------+----------+
-| Models | Precision | Recall |   F1  | Precision | Recall |   F1  | Accuracy |
-+--------+-----------+--------+-------+-----------+--------+-------+----------+
-|  Main  |   0.900   |  0.899 | 0.899 |   0.899   |  0.899 | 0.899 |   0.899  |<-------🤯
-+--------+-----------+--------+-------+-----------+--------+-------+----------+
-|  Var 1 |   0.804   |  0.796 | 0.793 |   0.794   |  0.794 | 0.794 |   0.794  |
-+--------+-----------+--------+-------+-----------+--------+-------+----------+
-|  Var 2 |   0.722   |  0.720 | 0.719 |   0.721   |  0.721 | 0.721 |   0.721  |
-+--------+-----------+--------+-------+-----------+--------+-------+----------+
-
-
 ## References
 1. Original data can be found here [Provenance Information](https://www.kaggle.com/datasets/ananthu017/emotion-detection-fer?rvi=1)
