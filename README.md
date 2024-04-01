@@ -6,12 +6,10 @@ Welcome to CNN Emotion Detector, where the future of AI-driven feedback takes sh
 
 [Our GitHub Repo](https://github.com/loaidieu/CNN-Emotion-Dectector)
 
-- :neutral_face: **Neutral**
-- :smiley: **Happy**
-- :astonished: **Surprised**
-- :nerd_face: **Engaged**
-
-## Table of Contents
+- :nerd_face: **Engaged** (numerical label 0)
+- :smiley: **Happy** (numerical label 1)
+- :neutral_face: **Neutral** (numerical label 2)
+- :astonished: **Surprised** (numerical label 3)
 
 
 ## Installation
