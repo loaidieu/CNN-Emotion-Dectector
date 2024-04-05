@@ -1,3 +1,7 @@
 .DS_Store
 data/.DS_Store
 **/__pycache__/
+results/main_confusion_matrix.png
+results/variant_1_confusion_matrix.png
+results/variant_2_confusion_matrix.png
+data_visuals/
