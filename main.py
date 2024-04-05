@@ -10,15 +10,15 @@ subprocess.check_call(['pip', 'install', '-r', 'requirements.txt'],
 ####################################################################################################################################################################
 # Import the Required Libraries
 ####################################################################################################################################################################
-from data_processing import *
-from data_visualization import *
-from custom_dataset import *
-from tools_lib import DataLoader, pd
+from data_analysis.data_processing import *
+from data_analysis.data_visualization import *
+from utils.custom_dataset import *
+from utils.tools_lib import DataLoader, pd
 from models.main_model import MainCnn
 from models.variant_1 import VarCnn1
 from models.variant_2 import VarCnn2
-from train_loop import train_loop
-from predict import predict
+from training_and_testing.train_loop import train_loop
+from training_and_testing.predict import predict
 
 ####################################################################################################################################################################
 # Data Processing

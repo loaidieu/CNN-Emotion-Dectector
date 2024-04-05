@@ -1,4 +1,4 @@
-from tools_lib import *
+from utils.tools_lib import *
 
 torch.manual_seed(0) # reproducibility
 
