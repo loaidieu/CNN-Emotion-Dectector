@@ -8,7 +8,6 @@ def train_loop(model, optimizer, train_loader, val_loader, loss, epochs, patienc
 
     best_val_loss = float('inf')
     counter       = 0
-    stop_epoch    = 1
 
     print(f"Training {model.__class__.__name__}")
     for epoch in tqdm(range(epochs), desc='epochs'):
@@ -20,16 +19,13 @@ def train_loop(model, optimizer, train_loader, val_loader, loss, epochs, patienc
         val_losses.append(val_loss)
         val_accuracies.append(val_accuracy)
 
-        stop_epoch = epoch
-
         if val_loss < best_val_loss:
             best_val_loss = val_loss
             counter       = 0
         else:
             if counter >= patience:
+                print(f"Early stopping at epoch {epoch}")
                 break
             counter += 1
-
-    torch.save(model.state_dict(), f"models/trained/trained_{model.__class__.__name__}.pkl")
 
     return train_losses, train_accuracies, val_losses, val_accuracies
