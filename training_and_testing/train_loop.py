@@ -27,9 +27,8 @@ def train_loop(model, optimizer, train_loader, val_loader, loss, epochs, patienc
             counter       = 0
         else:
             if counter >= patience:
-                print(f"Early stopping at epoch {stop_epoch}")
                 break
-            else: counter += 1
+            counter += 1
 
     torch.save(model.state_dict(), f"models/trained/trained_{model.__class__.__name__}.pkl")
 
