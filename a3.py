@@ -15,8 +15,6 @@ from data_analysis.data_visualization import *
 from utils.custom_dataset import *
 from utils.tools_lib import DataLoader, pd
 from models.main_model import MainCnn
-from models.variant_1 import VarCnn1
-from models.variant_2 import VarCnn2
 from training_and_testing.train_loop import train_loop
 from training_and_testing.predict import predict
 
@@ -95,17 +93,29 @@ lr = 0.001
 wd = 0.001
 
 # initialize models
-main_model  = MainCnn()
-var_model_1 = VarCnn1()
-var_model_2 = VarCnn2()
+main_model  = MainCnn(
+    cnn_layer1_kernels=16,
+    cnn_layer1_kernel_size=3,
+    cnn_layer1_padding=None,
+    cnn_layer1_poolsize=2,
+    cnn_layer1_dropout=0.25,
+    cnn_layer2_kernels=32,
+    cnn_layer2_kernel_size=5,
+    cnn_layer2_padding=None,
+    cnn_layer2_poolsize=2,
+    cnn_layer2_dropout=0.25,
+    cnn_layer3_kernels=64,
+    cnn_layer3_kernel_size=7,
+    cnn_layer3_padding=None,
+    cnn_layer3_poolsize=2,
+    cnn_layer3_dropout=0.1
+)
 
 # loss function
 loss = torch.nn.CrossEntropyLoss()
 
 # optimizer
 main_optimizer = torch.optim.Adam(main_model.parameters(), lr=lr, weight_decay=wd, betas=(0.9, 0.999))
-var1_optimizer = torch.optim.Adam(var_model_1.parameters(), lr=lr, weight_decay=wd, betas=(0.9, 0.999))
-var2_optimizer = torch.optim.Adam(var_model_2.parameters(), lr=lr, weight_decay=wd, betas=(0.9, 0.999))
 
 # number of epochs
 epochs = 50
@@ -187,3 +197,33 @@ print('Recall Macro:', np.mean(recall_scores_macro))
 print('Recall Micro:', np.mean(recall_scores_micro))
 print('F1 Macro:', np.mean(f1_scores_macro))
 print('F1 Micro:', np.mean(f1_scores_micro))
+
+# save the metrics into a file
+metrics = {
+    'Fold': ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Average'],
+    'Macro': {
+        'Precision': precision_scores_macro + [np.mean(precision_scores_macro)],
+        'Recall': recall_scores_macro + [np.mean(recall_scores_macro)],
+        'F1': f1_scores_macro + [np.mean(f1_scores_macro)]
+    },
+    'Micro': {
+        'Precision': precision_scores_micro + [np.mean(precision_scores_micro)],
+        'Recall': recall_scores_micro + [np.mean(recall_scores_micro)],
+        'F1': f1_scores_micro + [np.mean(f1_scores_micro)]
+    },
+    'Accuracy': accuracy_scores + [np.mean(accuracy_scores)],
+}
+
+# Create a MultiIndex DataFrame
+metrics_df = pd.DataFrame({
+    ('', 'Fold'): ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Average'],
+    ('Macro', 'Precision'): metrics['Macro']['Precision'],
+    ('Macro', 'Recall'): metrics['Macro']['Recall'],
+    ('Macro', 'F1'): metrics['Macro']['F1'],
+    ('Micro', 'Precision'): metrics['Micro']['Precision'],
+    ('Micro', 'Recall'): metrics['Micro']['Recall'],
+    ('Micro', 'F1'): metrics['Micro']['F1'],
+    ('', 'Accuracy'): metrics['Accuracy']
+})
+
+metrics_df.to_csv('results/kfold_cv.csv', index=False)
