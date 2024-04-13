@@ -32,6 +32,7 @@ class MainCnn(torch.nn.Module):
         self.dropout = torch.nn.Dropout(p=0.1)
 
     def forward(self, x):
+        x = x.float()
         x = self.pool1(self.relu1(self.bn1(self.conv1(x))))
         x = self.pool2(self.relu2(self.bn2(self.conv2(x))))
         x = self.pool3(self.relu3(self.bn3(self.conv3(x))))

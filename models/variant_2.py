@@ -20,6 +20,7 @@ class VarCnn2(torch.nn.Module):
         self.dropout = torch.nn.Dropout(p=0.1)
 
     def forward(self, x):
+        x = x.float()
         x = self.pool1(self.relu1(self.bn1(self.conv1(x))))
         x = self.flatten(x)
         x = self.dropout(x)
