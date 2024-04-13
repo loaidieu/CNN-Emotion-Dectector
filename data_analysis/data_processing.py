@@ -52,10 +52,10 @@ def png_to_dict(images_folder):
 
                     # add to dictionary (key: filename, value: dictionary with np array, path, age, gender, emotion)
                     images[f'{emotion_folder}/{image_filename}'] = {'np_array': img_array_flat,
-                                                              'path': image_path,
-                                                              'age': img_age,
-                                                              'gender': img_gender,
-                                                              'emotion': emotion_folder}
+                                                                    'path': image_path,
+                                                                    'age': img_age,
+                                                                    'gender': img_gender,
+                                                                    'emotion': emotion_folder}
 
     return images
 
