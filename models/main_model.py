@@ -25,8 +25,8 @@ class MainCnn(torch.nn.Module):
             cnn_layer3_kernel_size=7,
             cnn_layer3_padding=None,
             cnn_layer3_poolsize=2,
-            cnn_layer3_dropout=0.1
-            ):
+            cnn_layer3_dropout=0.1,
+        ):
         super(MainCnn, self).__init__()
 
         if cnn_layer1_padding is None: cnn_layer1_padding = cnn_layer1_kernel_size // 2
@@ -149,7 +149,6 @@ class MainCnn(torch.nn.Module):
             torch.nn.Flatten()
         )
 
-        # linear
         self.dense_module.add_module(
             'linear',
             torch.nn.Linear(
