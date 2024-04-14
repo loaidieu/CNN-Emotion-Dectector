@@ -72,7 +72,7 @@ y_trn, y_tst = torch.tensor(y_trn, dtype=torch.int64), torch.tensor(y_tst, dtype
 X_tst, X_val, y_tst, y_val = train_test_split(X_tst, y_tst, test_size=0.5, random_state=42)
 
 # create dataloader objects for train, test, and validation data
-batch_size = 128
+batch_size = 64
 
 train_data = CustomDataset(X_trn, y_trn)
 val_data   = CustomDataset(X_val, y_val)
@@ -91,25 +91,25 @@ tst_loader = DataLoader(dataset=tst_data,
                         shuffle=False)
 
 # hyperparameters
-lr = 0.001
+lr = 0.0001
 wd = 0.001
 
 # initialize models
 main_model  = MainCnn(
     cnn_layer1_kernels=32,
-    cnn_layer1_kernel_size=3,
+    cnn_layer1_kernel_size=5,
     cnn_layer1_padding=None,
     cnn_layer1_poolsize=2,
     cnn_layer1_dropout=0.25,
 
     cnn_layer2_kernels=64,
-    cnn_layer2_kernel_size=5,
+    cnn_layer2_kernel_size=7,
     cnn_layer2_padding=None,
     cnn_layer2_poolsize=2,
     cnn_layer2_dropout=0.25,
 
     cnn_layer3_kernels=128,
-    cnn_layer3_kernel_size=7,
+    cnn_layer3_kernel_size=9,
     cnn_layer3_padding=None,
     cnn_layer3_poolsize=2,
     cnn_layer3_dropout=0.25,
@@ -134,7 +134,7 @@ stop_epoch    = 1             # keep track of at which epoch early stopping is t
 # 10 fold cross validation
 ####################################################################################################################################################################
 # if run is set to True, the function will run the 10 fold cross validation
-ten_fold_cv(run=False, 
+ten_fold_cv(run=True, 
             X_trn=X_trn, 
             y_trn=y_trn, 
             loss=loss, 
