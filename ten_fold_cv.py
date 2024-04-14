@@ -37,20 +37,20 @@ def ten_fold_cv(run, X_trn, y_trn, lr, wd, epochs, patience):
 
             # initialize the model
             model = MainCnn(
-                cnn_layer1_kernels=32,
+                cnn_layer1_kernels=16,
                 cnn_layer1_kernel_size=5,
                 cnn_layer1_padding=None,
                 cnn_layer1_poolsize=2,
                 cnn_layer1_dropout=0.25,
 
-                cnn_layer2_kernels=64,
-                cnn_layer2_kernel_size=7,
+                cnn_layer2_kernels=32,
+                cnn_layer2_kernel_size=5,
                 cnn_layer2_padding=None,
                 cnn_layer2_poolsize=2,
                 cnn_layer2_dropout=0.25,
 
-                cnn_layer3_kernels=128,
-                cnn_layer3_kernel_size=9,
+                cnn_layer3_kernels=64,
+                cnn_layer3_kernel_size=5,
                 cnn_layer3_padding=None,
                 cnn_layer3_poolsize=2,
                 cnn_layer3_dropout=0.25,
