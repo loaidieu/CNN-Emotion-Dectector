@@ -4,7 +4,7 @@ from models.main_model import MainCnn
 from training_and_testing.train_loop import train_loop
 from training_and_testing.predict import predict
 
-def ten_fold_cv(run, X_trn, y_trn, loss, lr, wd, epochs, patience):
+def ten_fold_cv(run, X_trn, y_trn, lr, wd, epochs, patience):
     if run == True:
         # initialize the kfold object
         kfold = KFold(n_splits=10, shuffle=True, random_state=42)
@@ -36,10 +36,31 @@ def ten_fold_cv(run, X_trn, y_trn, loss, lr, wd, epochs, patience):
             val_loader = DataLoader(dataset=val_data, batch_size=64)
 
             # initialize the model
-            model = MainCnn()
+            model = MainCnn(
+                cnn_layer1_kernels=32,
+                cnn_layer1_kernel_size=5,
+                cnn_layer1_padding=None,
+                cnn_layer1_poolsize=2,
+                cnn_layer1_dropout=0.25,
+
+                cnn_layer2_kernels=64,
+                cnn_layer2_kernel_size=7,
+                cnn_layer2_padding=None,
+                cnn_layer2_poolsize=2,
+                cnn_layer2_dropout=0.25,
+
+                cnn_layer3_kernels=128,
+                cnn_layer3_kernel_size=9,
+                cnn_layer3_padding=None,
+                cnn_layer3_poolsize=2,
+                cnn_layer3_dropout=0.25,
+            )
 
             # initialize the optimizer
             optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=wd, betas=(0.9, 0.999))
+
+            # loss function
+            loss = torch.nn.CrossEntropyLoss()
 
             # train the model
             train_losses, train_accuracies, val_losses, val_accuracies = train_loop(model, optimizer, train_loader, val_loader, loss, epochs, patience)
