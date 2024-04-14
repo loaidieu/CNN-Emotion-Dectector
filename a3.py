@@ -94,33 +94,6 @@ tst_loader = DataLoader(dataset=tst_data,
 lr = 0.0001
 wd = 0.001
 
-# initialize models
-main_model  = MainCnn(
-    cnn_layer1_kernels=32,
-    cnn_layer1_kernel_size=5,
-    cnn_layer1_padding=None,
-    cnn_layer1_poolsize=2,
-    cnn_layer1_dropout=0.25,
-
-    cnn_layer2_kernels=64,
-    cnn_layer2_kernel_size=7,
-    cnn_layer2_padding=None,
-    cnn_layer2_poolsize=2,
-    cnn_layer2_dropout=0.25,
-
-    cnn_layer3_kernels=128,
-    cnn_layer3_kernel_size=9,
-    cnn_layer3_padding=None,
-    cnn_layer3_poolsize=2,
-    cnn_layer3_dropout=0.25,
-)
-
-# loss function
-loss = torch.nn.CrossEntropyLoss()
-
-# optimizer
-main_optimizer = torch.optim.Adam(main_model.parameters(), lr=lr, weight_decay=wd, betas=(0.9, 0.999))
-
 # number of epochs
 epochs = 100
 
@@ -136,8 +109,7 @@ stop_epoch    = 1             # keep track of at which epoch early stopping is t
 # if run is set to True, the function will run the 10 fold cross validation
 ten_fold_cv(run=True, 
             X_trn=X_trn, 
-            y_trn=y_trn, 
-            loss=loss, 
+            y_trn=y_trn,  
             lr=lr, wd=wd,
             epochs=epochs, 
             patience=patience)
