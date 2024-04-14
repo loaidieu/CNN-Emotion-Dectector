@@ -17,9 +17,6 @@ def bias_detector(model, test_images, attribute):
         y = value['emotion']
         attribute_groups[value[attribute].values[0]].append((X, y))
 
-    for group, items in attribute_groups.items():
-        print(f"Number of items in group {group}: {len(items)}")
-
     # loop through the attribute groups
     accuracy_scores = {}
     precision_scores_macro = {}
@@ -51,7 +48,7 @@ def bias_detector(model, test_images, attribute):
         X_tst, y_tst = torch.tensor(X_tst, dtype=torch.float32), torch.tensor(y_tst, dtype=torch.int64)
 
         # convert the data into a custom dataset and dataloader
-        batch_size = 128
+        batch_size = 64
         tst_data   = CustomDataset(X_tst, y_tst)
         tst_loader = DataLoader(dataset=tst_data,
                         batch_size=batch_size,

@@ -20,19 +20,20 @@ def ten_fold_cv(run, X_trn, y_trn, loss, lr, wd, epochs, patience):
 
         # loop through the 10 folds
         highest_accuracy = 0
+        fold_numer = 1
         for train_index, val_index in kfold.split(X_trn):
-            print(f"Fold {train_index + 1}")
+            print(f'Fold {fold_numer}')
 
             # split the data
             X_trn_fold, X_val_fold = X_trn[train_index], X_trn[val_index]
             y_trn_fold, y_val_fold = y_trn[train_index], y_trn[val_index]
 
-            # Create dataloader objects for train and validation data
+            # create dataloader objects for train and validation data
             train_data = CustomDataset(X_trn_fold, y_trn_fold)
             val_data = CustomDataset(X_val_fold, y_val_fold)
 
-            train_loader = DataLoader(dataset=train_data, batch_size=128)
-            val_loader = DataLoader(dataset=val_data, batch_size=128)
+            train_loader = DataLoader(dataset=train_data, batch_size=64)
+            val_loader = DataLoader(dataset=val_data, batch_size=64)
 
             # initialize the model
             model = MainCnn()
@@ -68,6 +69,9 @@ def ten_fold_cv(run, X_trn, y_trn, loss, lr, wd, epochs, patience):
             if accuracy > highest_accuracy:
                 torch.save(model.state_dict(), f"models/trained/trained_main_model.pkl")
                 highest_accuracy = accuracy
+
+            # increment the fold number
+            fold_numer += 1
 
         # save the metrics into a file
         metrics = {
