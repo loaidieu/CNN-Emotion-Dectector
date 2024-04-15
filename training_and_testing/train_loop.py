@@ -9,7 +9,6 @@ def train_loop(model, optimizer, train_loader, val_loader, loss, epochs, patienc
     best_val_loss = float('inf')
     counter       = 0
 
-    print(f"Training {model.__class__.__name__}")
     for epoch in tqdm(range(epochs), desc='epochs'):
         train_loss, train_accuracy = train(train_loader, model, loss, optimizer)
         val_loss, val_accuracy     = test(val_loader, model, loss)

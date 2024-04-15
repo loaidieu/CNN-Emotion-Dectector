@@ -7,7 +7,7 @@ def predict(test_loader, model):
     model.eval()
 
     for images, labels in test_loader:
-        images  = images.reshape(-1, 1, 48, 48)
+        images  = images.reshape(-1, 1, 48, 48).to(model.device)
         outputs = model(images)
 
         probs = torch.nn.functional.softmax(model(images), dim=1)

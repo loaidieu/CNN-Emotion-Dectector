@@ -8,6 +8,7 @@ def train(train_loader, model, loss, optimizer):
     model.train()
 
     for images, labels in train_loader:
+        images, labels = images.to(model.device), labels.to(model.device)
         images  = images.reshape(-1, 1, 48, 48)            # reshape the images into size (1, 48, 48) for cnn
         outputs = model(images)
 
