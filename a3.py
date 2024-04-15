@@ -176,7 +176,7 @@ if run_train:
 # 10 fold cross validation
 ####################################################################################################################################################################
 # if run is set to True, the function will run the 10 fold cross validation
-run_cv = True
+run_cv = False
 
 if run_cv:
     print('Running 10 fold cross validation...')
@@ -193,7 +193,7 @@ if run_cv:
 # bias detection
 ####################################################################################################################################################################
 # load the model
-run_bias = False
+run_bias = True
 
 if run_bias:
     print('Detecting bias...')
