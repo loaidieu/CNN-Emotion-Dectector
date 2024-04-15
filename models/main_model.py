@@ -7,24 +7,24 @@ class MainCnn(torch.nn.Module):
             self,
 
             # conv layer 1
-            cnn_layer1_kernels=16,
+            cnn_layer1_kernels=32,
             cnn_layer1_kernel_size=3,
             cnn_layer1_padding=None,
-            cnn_layer1_poolsize=2,
+            cnn_layer1_poolsize=3,
             cnn_layer1_dropout=0.1,
 
             # conv layer 2
-            cnn_layer2_kernels=32,
+            cnn_layer2_kernels=64,
             cnn_layer2_kernel_size=5,
             cnn_layer2_padding=None,
-            cnn_layer2_poolsize=2,
+            cnn_layer2_poolsize=3,
             cnn_layer2_dropout=0.1,
 
             # conv layer 3
-            cnn_layer3_kernels=64,
+            cnn_layer3_kernels=128,
             cnn_layer3_kernel_size=7,
             cnn_layer3_padding=None,
-            cnn_layer3_poolsize=2,
+            cnn_layer3_poolsize=3,
             cnn_layer3_dropout=0.1,
         ):
         super(MainCnn, self).__init__()
@@ -32,6 +32,10 @@ class MainCnn(torch.nn.Module):
         if cnn_layer1_padding is None: cnn_layer1_padding = cnn_layer1_kernel_size // 2
         if cnn_layer2_padding is None: cnn_layer2_padding = cnn_layer2_kernel_size // 2
         if cnn_layer3_padding is None: cnn_layer3_padding = cnn_layer3_kernel_size // 2
+
+        # set device to cuda if available
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.to(self.device)
 
         ##########################################################################################################
         # CONVOLUTIONAL MODULE
@@ -170,7 +174,7 @@ class MainCnn(torch.nn.Module):
         return num_features
 
     def forward(self, x):
-        x = x.float()
+        x = x.float().to(self.device)
         x = self.conv_module(x)
         x = self.dense_module(x)
         return x
