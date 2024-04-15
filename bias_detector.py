@@ -2,6 +2,8 @@ from utils.tools_lib import *
 from utils.custom_dataset import *
 from training_and_testing.predict import predict
 
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
 def bias_detector(model, test_images, attribute):
     # group data by age
     attribute_groups = {}
@@ -45,7 +47,7 @@ def bias_detector(model, test_images, attribute):
         y_tst = np.array([label_map[item] for item in y_tst])
 
         # convert X and y into tensors
-        X_tst, y_tst = torch.tensor(X_tst, dtype=torch.float32), torch.tensor(y_tst, dtype=torch.int64)
+        X_tst, y_tst = torch.tensor(X_tst, dtype=torch.float32).to(device), torch.tensor(y_tst, dtype=torch.int64).to(device)
 
         # convert the data into a custom dataset and dataloader
         batch_size = 64
@@ -56,6 +58,9 @@ def bias_detector(model, test_images, attribute):
 
         # predict the data
         y_pred = predict(tst_loader, model)
+
+        y_tst = y_tst.cpu()
+        y_pred = [tensor.cpu() for tensor in y_pred]
 
         # calculate metrics
         accuracy = accuracy_score(y_tst, y_pred)
