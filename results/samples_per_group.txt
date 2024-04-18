@@ -1,0 +1,4 @@
+Group: young, Number of samples: 289
+Group: old, Number of samples: 115
+Group: male, Number of samples: 215
+Group: female, Number of samples: 189
