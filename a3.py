@@ -14,7 +14,8 @@ from data_analysis.data_processing import *
 from data_analysis.data_visualization import *
 from utils.custom_dataset import *
 from utils.tools_lib import DataLoader, pd
-from models.main_model import MainCnn
+from models.model_a3 import CnnA3
+from models.model_a2 import CnnA2
 from training_and_testing.train_loop import train_loop
 from training_and_testing.predict import predict
 from ten_fold_cv import ten_fold_cv
@@ -104,19 +105,19 @@ stop_epoch    = 1             # keep track of at which epoch early stopping is t
 run_train = False
 
 if run_train:
-    print('Training the main model...')
+    print('Training the model...')
 
     # initialize the model
-    main_model = MainCnn().to(device)
+    model = CnnA3().to(device)
 
     # initialize the optimizer
-    main_optimizer = torch.optim.Adam(main_model.parameters(), lr=lr, weight_decay=wd, betas=(0.9, 0.999))
+    main_optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=wd, betas=(0.9, 0.999))
 
     # loss function
     loss = torch.nn.CrossEntropyLoss()
 
     # train the model
-    main_train_losses, main_train_accuracies, main_val_losses, main_val_accuracies = train_loop(main_model, 
+    model_train_losses, model_train_accuracies, model_val_losses, model_val_accuracies = train_loop(model, 
                                                                                                 main_optimizer, 
                                                                                                 train_loader, 
                                                                                                 tst_loader, 
@@ -125,10 +126,10 @@ if run_train:
                                                                                                 patience)
     
     # save the trained model
-    torch.save(main_model.state_dict(), 'models/trained/trained_main_model.pkl')
+    torch.save(model.state_dict(), f'models/trained/trained_{model.__class__.__name__}_model.pkl')
 
     # predict the validation data
-    y_pred = predict(tst_loader, main_model)
+    y_pred = predict(tst_loader, model)
 
     y_tst_cpu = y_tst.cpu()
     y_pred = [tensor.cpu() for tensor in y_pred]
@@ -158,7 +159,7 @@ if run_train:
     }
 
     metrics = pd.DataFrame({
-        ('', 'model'): ['main_model'],
+        ('', 'model'): [f'{model.__class__.__name__}'],
         ('Macro', 'Precision'): metrics['Macro']['Precision'],
         ('Macro', 'Recall'): metrics['Macro']['Recall'],
         ('Macro', 'F1'): metrics['Macro']['F1'],
@@ -169,9 +170,9 @@ if run_train:
     })
 
     # save the metrics into a file
-    metrics.to_csv(f'results/main_model_metrics.csv', index=False)
+    metrics.to_csv(f'results/{model.__class__.__name__}_metrics.csv', index=False)
 
-    print('Main model training completed.\n')
+    print('Model training completed.\n')
 ####################################################################################################################################################################
 # 10 fold cross validation
 ####################################################################################################################################################################
@@ -198,8 +199,8 @@ run_bias = True
 if run_bias:
     print('Detecting bias...')
 
-    model = MainCnn().to(device)
-    model.load_state_dict(torch.load('models/trained/trained_main_model.pkl'))
+    model = CnnA3().to(device)
+    model.load_state_dict(torch.load('models/trained/trained_CnnA3_model.pkl'))
 
     age_bias_df = bias_detector(model, test_images, 'age')
     gender_bias_df = bias_detector(model, test_images, 'gender')
