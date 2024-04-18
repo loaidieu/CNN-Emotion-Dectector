@@ -173,6 +173,51 @@ if run_train:
     metrics.to_csv(f'results/{model.__class__.__name__}_metrics.csv', index=False)
 
     print('Model training completed.\n')
+
+####################################################################################################################################################################
+# prediction on one image
+####################################################################################################################################################################
+import random
+
+run_single_prediction = False
+
+if run_single_prediction:
+    print('Predicting a random image...')
+
+    # convert test loader to an iterator
+    tst_iter = iter(tst_loader)
+
+    # get a random batch of data
+    images, labels = next(tst_iter)
+
+    # select a random image and its label from the batch
+    index = random.choice(range(len(images)))
+    random_image = images[index]
+    random_label = labels[index]
+
+    # load the model
+    model = CnnA3().to(device)
+    model.load_state_dict(torch.load('models/trained/trained_CnnA3_model.pkl'))
+
+    # predict the random image
+    test_image = random_image.reshape(-1, 1, 48, 48).to(model.device)
+    output     = model(test_image)
+
+    prob = torch.nn.functional.softmax(output, dim=1)
+    pred = torch.argmax(prob, dim=1)
+
+    # convert to string labels
+    label_map    = {0: 'focused', 1: 'happy', 2: 'neutral', 3: 'surprised'}
+    random_label = label_map[random_label.item()]
+    pred         = label_map[pred.item()]
+
+    # plot the random image
+    plot_image_w_pixel_density(random_image.cpu().numpy().reshape(48, 48), random_label)
+
+    # print the prediction
+    print(f'True label: {random_label}')
+    print(f'Predicted label: {pred}')
+
 ####################################################################################################################################################################
 # 10 fold cross validation
 ####################################################################################################################################################################
@@ -194,7 +239,7 @@ if run_cv:
 # bias detection
 ####################################################################################################################################################################
 # load the model
-run_bias = True
+run_bias = False
 
 if run_bias:
     print('Detecting bias...')
