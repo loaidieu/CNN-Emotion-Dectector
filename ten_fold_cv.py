@@ -1,6 +1,7 @@
 from utils.custom_dataset import *
 from utils.tools_lib import DataLoader, pd
-from models.main_model import MainCnn
+from models.model_a3 import CnnA3
+from models.model_a2 import CnnA2
 from training_and_testing.train_loop import train_loop
 from training_and_testing.predict import predict
 
@@ -36,7 +37,7 @@ def ten_fold_cv(X_trn, y_trn, lr, wd, epochs, patience):
         val_loader = DataLoader(dataset=val_data, batch_size=64)
 
         # initialize the model
-        model = MainCnn()
+        model = CnnA3()
 
         model.to(device)
 
@@ -110,4 +111,4 @@ def ten_fold_cv(X_trn, y_trn, lr, wd, epochs, patience):
         ('', 'Accuracy'): metrics['Accuracy']
     })
 
-    metrics_df.to_csv('results/kfold_cv.csv', index=False)
+    metrics_df.to_csv(f'results/{model.__class__.__name__}_kfold_cv.csv', index=False)
