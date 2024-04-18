@@ -19,6 +19,10 @@ def bias_detector(model, test_images, attribute):
         y = value['emotion']
         attribute_groups[value[attribute].values[0]].append((X, y))
 
+    # print the number of samples in each group
+    for group, value in attribute_groups.items():
+        print(f'Group: {group}, Number of samples: {len(value)}')
+
     # loop through the attribute groups
     accuracy_scores = {}
     precision_scores_macro = {}
