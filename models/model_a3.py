@@ -2,7 +2,7 @@ from utils.tools_lib import *
 
 torch.manual_seed(0) # reproducibility
 
-class MainCnn(torch.nn.Module):
+class CnnA3(torch.nn.Module):
     def __init__(
             self,
 
@@ -27,7 +27,7 @@ class MainCnn(torch.nn.Module):
             cnn_layer3_poolsize=3,
             cnn_layer3_dropout=0.1,
         ):
-        super(MainCnn, self).__init__()
+        super(CnnA3, self).__init__()
 
         if cnn_layer1_padding is None: cnn_layer1_padding = cnn_layer1_kernel_size // 2
         if cnn_layer2_padding is None: cnn_layer2_padding = cnn_layer2_kernel_size // 2
